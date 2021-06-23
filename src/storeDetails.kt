@@ -1,6 +1,14 @@
 object DishMenu {
     val menu = mutableMapOf<Int, Dish>()
 
+    init {
+        val d1 = Dish(0, "Maggie", 30)
+        val d2 = Dish(1, "Pasta", 50)
+        val d3 = Dish(2, "Ice-Cream", 20)
+        menu[d1.dishId] = d1
+        menu[d2.dishId] = d2
+        menu[d3.dishId] = d3
+    }
     fun getDish(dishId: Int): Dish? {
         return menu[dishId]
     }
@@ -9,11 +17,11 @@ object DishMenu {
         println("=====================================")
         println("\t\t\t\tMenu")
         println("=====================================")
-        println("Dish ID\t\t Dish Name\t\t Price")
+        println("Dish ID\t\t\t\t Dish Name\t\t\t\t Price")
         println("=====================================")
         println()
         for(dish in menu.values) {
-            println("${dish.dishId}\t\t ${dish.dishName}\t\t${dish.dishPrice}")
+            println("${dish.dishId}\t\t\t\t ${dish.dishName}\t\t\t\t ${dish.dishPrice}")
         }
         println("=====================================")
         println()
