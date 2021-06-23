@@ -43,7 +43,9 @@ object Chef {
     private fun showPendingOrders() {
         for(orderId in orderList.keys) {
             val order = orderList[orderId]
-            println("Order ID: $order.orderId")
+            if (order != null) {
+                println("Order ID: ${order.orderId}")
+            }
         }
 
         println("Select orderID: ")

@@ -1,17 +1,26 @@
 object Admin {
     fun displayOptions() {
-        println("Welcome Admin! ")
-        println()
-        println("Select Your Action: ")
-        println("1) Add User/Chef Account")
-        println("2) Delete User/Chef Account ")
-        println("3) Display all Accounts")
+        while (true) {
+            println("Welcome Admin! ")
+            println()
+            println("Select Your Action: ")
+            println("1) Add User/Chef Account")
+            println("2) Delete User/Chef Account ")
+            println("3) Display all Accounts")
+            println("--Press 0 to Exit--")
 
-        when(readLine()!!.toInt()) {
-            1 -> addNewUser()
-            2 -> deleteUser()
-            3 -> UserDatabase.display()
-            else -> println("Invalid Input!")
+            var input = -1
+            while (input !in 0..5) {
+                input = readLine()?.toInt()!!
+            }
+
+            when (input) {
+                0 -> break
+                1 -> addNewUser()
+                2 -> deleteUser()
+                3 -> UserDatabase.display()
+                else -> println("Invalid Input!")
+            }
         }
     }
 
