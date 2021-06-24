@@ -1,8 +1,8 @@
-class User(userId: String) {
+class User(userId: String): Person() {
 
     private val currentOrder = Order(userId, orderList.size)
 
-    fun displayOptions() {
+    override fun displayOptions() {
         while (true) {
             println("Select your action: ")
             println("1) Select Dishes")

@@ -31,12 +31,9 @@ fun login(userType: Int) {
     println("Enter Password: ")
     val pass = readLine() as String
 
-    val user = Person(userid, pass, userType)
-    when(UserDatabase.authenticate(user)) {
-        -1 -> println("No such user exists.")
-        0 -> println("Wrong password.")
-        1 -> nextPage(user)
-    }
+    val auth = UserDatabase.authenticate(userid, pass, userType)
+    if(auth != null)
+        nextPage(auth)
 }
 
 fun nextPage(auth: Record) {

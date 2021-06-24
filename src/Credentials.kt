@@ -1,5 +1,16 @@
+enum class UserType {
+    ADMIN, CHEF, USER
+}
+
+data class Record(
+    val userId: String,
+    val password: String,
+    val type: UserType,
+    val name: String
+)
+
 object UserDatabase {
-    private var db = HashMap<String, Person>()
+    private var db = HashMap<String, Record>()
 
     init {
         val p1 = Record("user", "password", UserType.USER, "Aryan")
@@ -10,7 +21,7 @@ object UserDatabase {
         db[p3.userId] = p3
     }
 
-    fun addUser(user: Person) {
+    fun addUser(user: Record) {
         db[user.userId] = user
     }
 
@@ -24,7 +35,7 @@ object UserDatabase {
         println("UserID\t UserType")
         println()
         for(user in db.values) {
-            println("${user.userId}\t ${user.userType}")
+            println("${user.userId}\t ${user.type}")
         }
     }
 
