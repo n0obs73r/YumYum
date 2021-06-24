@@ -22,17 +22,30 @@ class Order (private val customerId: String, val orderId: Int) {
     }
 
     fun display() {
-        println("=====================================")
+        println("===============================================")
         println("Dish ID\t\tDish Name\t\tPrice\t\tQuantity")
         println()
-        println("=====================================")
+        println("===============================================")
         for(dishId in dishList.keys) {
-            val dish = DishMenu.getDish(dishId)
+            val dish = DishMenu().getDish(dishId)
             if (dish != null) {
                 println("${dish.dishId}\t\t ${dish.dishName}\t\t ${dish.dishPrice}\t\t ${dishList[dishId]}")
             }
         }
-        println("=====================================")
+        println("===============================================")
+        var sum = 0
+        for (i in dishList.keys)
+        {
+            val dish = DishMenu().getDish(i)
+
+            if (dish != null) {
+                sum += dish.dishPrice * dishList[i]!!
+            }
+        }
+        println("Total: \t\t\t\t\t$sum")
+        println("===============================================")
+        println("CustomerId: \t\t\t\t\t$customerId")
+        println("===============================================")
     }
 }
 

@@ -1,5 +1,5 @@
-object Chef {
-    fun displayOptions() {
+class Chef : Person() {
+    override fun displayOptions() {
         while (true) {
             println("Select your action: ")
             println("1) Create a Dish")
@@ -8,16 +8,16 @@ object Chef {
             println("4) Display Dish List")
             println("--Press 0 to Exit--")
 
-            var input = -1
+            var input: Int? = -1
             while (input !in 0..4) {
-                input = readLine()?.toInt()!!
+                input = readLine()?.toIntOrNull()
             }
             when (input) {
                 0 -> break
                 1 -> addDish()
                 2 -> removeDish()
                 3 -> showPendingOrders()
-                4 -> DishMenu.display()
+                4 -> DishMenu().display()
                 else -> println("Invalid Input!")
             }
         }
@@ -29,14 +29,14 @@ object Chef {
         println("Dish Price: ")
         val price = Integer.valueOf(readLine())
 
-        DishMenu.addDish(Dish(DishMenu.menu.size, name, price))
+        DishMenu().addDish(Dish(DishMenu().menu.size, name, price))
         println("Dish added")
     }
 
     private fun removeDish() {
         print("Enter Dish Id: ")
         val dishId = Integer.valueOf(readLine())
-        DishMenu.removeDish(dishId)
+        DishMenu().removeDish(dishId)
         println("Dish Deleted!")
     }
 

@@ -12,21 +12,22 @@ class User(userId: String) {
             println("5) Show Dish Menu")
             println("--Press 0 to Exit--")
 
-            var input = -1
+            var input: Int? = -1
             while (input !in 0..5) {
-                input = readLine()?.toInt()!!
+                input = readLine()?.toIntOrNull()
             }
-
             when (input) {
                 0 -> break
                 1 -> selectDish()
                 2 -> modifyOrder()
                 3 -> currentOrder.display()
                 4 -> {
+                    println("Your Order has been Confirmed!!")
                     orderList[currentOrder.orderId] = currentOrder
                     currentOrder.clear()
+                    println()
                 }
-                5 -> DishMenu.display()
+                5 -> DishMenu().display()
                 else -> println("Invalid Input!")
             }
         }

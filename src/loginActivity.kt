@@ -12,13 +12,15 @@ fun frontPage() {
         println("Press 0 to Exit")
         println()
 
-        var input = -1
+        var input: Int? = -1
         while (input !in 0..3) {
-            input = readLine()?.toInt()!!
+            input = readLine()?.toIntOrNull()
         }
         when(input) {
             0 -> break
-            else -> login(input - 1)
+            else -> if (input != null) {
+                login(input - 1)
+            }
         }
     }
 }
@@ -37,10 +39,20 @@ fun login(userType: Int) {
     }
 }
 
-fun nextPage(user: Person) {
-    when(user.userType) {
-        0 -> Admin.displayOptions()
-        1 -> Chef.displayOptions()
-        2 -> User(user.userId).displayOptions()
+fun nextPage(auth: Record) {
+    val user: Person
+    when(auth.type) {
+        UserType.ADMIN -> {
+            user = Admin()
+            user.displayOptions()
+        }
+        UserType.CHEF -> {
+            user = Chef()
+            user.displayOptions()
+        }
+        UserType.USER -> {
+            user = User(auth.name)
+            user.displayOptions()
+        }
     }
 }

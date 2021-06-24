@@ -1,5 +1,5 @@
-object Admin {
-    fun displayOptions() {
+class Admin : Person() {
+    override fun displayOptions() {
         while (true) {
             println("Welcome Admin! ")
             println()
@@ -9,9 +9,9 @@ object Admin {
             println("3) Display all Accounts")
             println("--Press 0 to Exit--")
 
-            var input = -1
-            while (input !in 0..5) {
-                input = readLine()?.toInt()!!
+            var input: Int? = -1
+            while (input !in 0..3) {
+                input = readLine()?.toIntOrNull()
             }
 
             when (input) {
@@ -31,6 +31,8 @@ object Admin {
         val userid = readLine() as String
         println("Password: ")
         val pass = readLine() as String
+        println("Name: ")
+        val name = readLine() as String
 
         println("Enter User type: ")
         println("0 for Admin")
@@ -38,7 +40,15 @@ object Admin {
         println("2 for User")
         val userType = readLine()!!.toInt()
 
-        val user = Person(userid, pass, userType)
+        lateinit var type : UserType
+        when(userType)
+        {
+            0 -> {type = UserType.ADMIN}
+            1 -> {type = UserType.CHEF}
+            2 -> {type = UserType.USER}
+        }
+
+        val user = Record(userid, pass, type, name)
         UserDatabase.addUser(user)
         println("---Account Added---")
     }

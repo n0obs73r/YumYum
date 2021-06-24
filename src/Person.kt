@@ -1,5 +1,3 @@
-class Person(
-    var userId: String,
-    var password: String,
-    var userType: Int
-    )
+abstract class Person {
+    abstract fun displayOptions()
+}

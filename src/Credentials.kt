@@ -2,9 +2,9 @@ object UserDatabase {
     private var db = HashMap<String, Person>()
 
     init {
-        val p1 = Person("user", "password", 2)
-        val p2 = Person("chef", "password", 1)
-        val p3 = Person("admin", "password", 0)
+        val p1 = Record("user", "password", UserType.USER, "Aryan")
+        val p2 = Record("chef", "password", UserType.CHEF, "Aryan")
+        val p3 = Record("admin", "password", UserType.ADMIN, "Aryan")
         db[p1.userId] = p1
         db[p2.userId] = p2
         db[p3.userId] = p3
@@ -28,15 +28,17 @@ object UserDatabase {
         }
     }
 
-    fun authenticate(user: Person): Int {
-        if (db.containsKey(user.userId)) {
-            val temp = db[user.userId]
-            if (user.userType != temp?.userType)
-                return -1
-            if (user.password == temp.password)
-                return 1
-            return 0
+    fun authenticate(userId: String, pass: String, userType: Int): Record? {
+        if(db.containsKey(userId)) {
+            val rec = db.getValue(userId)
+            if(userType == rec.type.ordinal && pass == rec.password) {
+                return rec
+            }
+            println("Wrong credentials")
+            return null
+        } else {
+            println("No such user exists.")
+            return null
         }
-        return -1
     }
 }
